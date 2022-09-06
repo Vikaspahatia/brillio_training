@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <img src="pres.png" alt="Prescripty">
+
+    <div class="container">
+        <form class="form" action="chkLogin">
+          <h1>Login</h1>
+          <div class="form-field">
+            <label for="username">UserName</label>
+            <input type="text" id="username" name="username" autocomplete="off" required>
+          </div>
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required class="password">
+          </div>
+          <button class="submit-btn">Login</button>
+          <p id="message-para" class="message-para"></p>
+          <h3><a href="./register.html">Register</a></h3>
+        </form>
+    </div>
+
+    <script>
+      document.querySelector('.submit-btn').addEventListener('click', (event)=> {
+        event.preventDefault();
+        const p = document.getElementById('password');
+        const m = document.getElementById('message-para');
+        const username = document.getElementById('username');
+        const form = document.querySelector(".form");
+
+        if(username.value == "" && p.value == "") {
+          m.innerHTML = "Fields cannot be empty.";
+          return;
+        }
+
+        if(p.value.length > 8) {
+          console.log('working');
+          if(!p.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+            m.innerHTML = "Password should contain atleast one uppercase, lowercase and a numeric value."
+          }
+          else {
+            form.submit();
+          }
+        }
+        else {
+          m.innerHTML = "Password Length should be greater than 8 characters.";
+        }
+
+      });
+
+    </script>
+</body>
+</html>

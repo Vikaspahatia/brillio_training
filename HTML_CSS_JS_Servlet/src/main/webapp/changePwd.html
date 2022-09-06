@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Change Password</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<div class="container">
+        <form class="form" action="changePass" method="post">
+          <h1>Change Password</h1>
+          <div class="form-field">
+            <label for="username">Enter new password</label>
+            <input type="password" id="password1" name="password" class="password" required>
+          </div>
+          <div class="form-field">
+            <label for="password">Reenter new password</label>
+            <input type="password" id="password2" required class="password">
+          </div>
+          <div>
+          	<input type="text" id="id" name="id" class="inpHidden">
+          </div>
+          <button class="submit-btn">Change</button>
+           <p id="message-para" class="message-para"></p>
+        </form>
+        
+        <script>
+        
+        	const p1 = document.getElementById('password1');
+        	const p2 = document.getElementById('password2');
+        	const form = document.querySelector('.form');
+        	const m = document.getElementById('message-para');
+        	const id = document.getElementById('id');
+
+        	document.querySelector('.submit-btn').addEventListener('click', (event) => {
+        		event.preventDefault();
+        		if(p1.value == "" && p2.value == "") {
+	                m.innerHTML = "Fields cannot be empty.";
+	                return;
+	              }
+	
+	              if(p1.value.length > 8 && p2.value.length) {
+	                console.log('working');
+	                if(!p1.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+	                  m.innerHTML = "Password should contain atleast one uppercase, lowercase and a numeric value."
+	                }
+	                else {
+	                	if(p1.value == p2.value) {
+	                		const queryString = window.location.search;
+	                		const urlParams = new URLSearchParams(queryString);
+	                		console.log(urlParams.get('id'))
+	                		id.value = urlParams.get('id')
+	                		console.log(id.value)
+		                  	form.submit();
+	                	}
+	                	else {
+	                		m.innerHTML = "Passwords do not match."
+	                	}
+	                }
+	              }
+	              else {
+	                m.innerHTML = "Password Length should be greater than 8 characters.";
+	              }
+        	})
+        </script>
+    </div>
+</body>
+</html>

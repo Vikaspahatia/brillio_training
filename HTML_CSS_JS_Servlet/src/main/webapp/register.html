@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <img class= "img" src="pres.png" alt="Prescripty">
+    <div class="container">
+      <form action="register" method="POST" class="form">
+        <h1>Register</h1>
+        <div class="form-field">
+          <label for="name">First Name</label>
+          <input type="text" id="fname" name="fname" required>
+        </div>
+        <div class="form-field">
+          <label for="name">Last Name</label>
+          <input type="text" id="lname" name="lname" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="email" required>
+        </div>
+        <div class="form-field">
+          <label for="name">ID</label>
+          <input type="text" id="id" name="id" required>
+        </div>
+        <div class="form-field">
+          <label for="name">Mobile</label>
+          <input type="tel" id="mobile" name="mobile" required>
+        </div>
+        <div class="form-field">
+          <label for="name">DOB</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        <button class="submit-btn">Register</button>
+        <p id="message-para" class="message-para"></p>
+        <h3><a href="./login.html">Login</a></h3>
+      </form>
+    </div>
+
+    <script>
+      document.querySelector('.submit-btn').addEventListener('click', (event)=> {
+        event.preventDefault();
+        
+        const fName = document.getElementById('fname');
+        const lName = document.getElementById('lname');
+        const email = document.getElementById('email');
+        const id = document.getElementById('id');
+        const mobile = document.getElementById('mobile');
+        const dob = document.getElementById('dob');
+        const form = document.querySelector(".form");
+        const m = document.getElementById("message-para");
+
+        if(fName.value == "" || lName.value == "" || email.value == "" || id.value == "" || mobile.value == "" || dob.value == "") {
+          m.innerHTML = "Fields cannot be empty.";
+          return;
+        }
+        
+        if(!fName.value.match(/^[a-zA-Z]*$/)) {
+        	m.innerHTML = "Invalid First Name."
+        	return;
+        }
+        
+        if(!lName.value.match(/^[a-zA-Z]*$/)) {
+        	m.innerHTML = "Invalid Last Name."
+        	return;
+        }
+        
+        if(mobile.value.length != 10) {
+        	m.innerHTML = "Invalid Phone No.";
+        	return;
+        }
+
+        if(!email.checkValidity()) {
+          m.innerHTML = "Email field should have a valid email value.";
+          return;
+        }
+        
+        form.submit();
+
+      });
+
+    </script>
+</body>
+</html>
